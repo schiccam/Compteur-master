@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Settings extends AppCompatActivity {
 
@@ -40,7 +41,11 @@ public class Settings extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
+                if (bar1.getProgress()>=bar2.getProgress())
+                {
+                    bar1.setProgress(bar2.getProgress()-1);
+                    Toast.makeText(getApplicationContext(),"Erreur : Début plus grand ou égal à Limite",Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
@@ -55,6 +60,8 @@ public class Settings extends AppCompatActivity {
                 ValDeb.setText(String.valueOf(bar1.getProgress()));
 
 
+
+
             }
         });
 
@@ -62,7 +69,11 @@ public class Settings extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
+                if (bar2.getProgress()<=bar1.getProgress())
+                {
+                    bar2.setProgress(bar1.getProgress()+1);
+                    Toast.makeText(getApplicationContext(),"Erreur : Limite plus petit ou égal à Début",Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
