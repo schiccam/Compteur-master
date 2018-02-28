@@ -33,11 +33,8 @@ public class Settings extends AppCompatActivity {
         ValDeb = (TextView)findViewById(R.id.tvValeurDeb);
         ValLim = (TextView)findViewById(R.id.tvValeurLim);
 
-
         ValDeb.setText(String.valueOf(bar1.getProgress()));
         ValLim.setText(String.valueOf(bar2.getProgress()));
-
-
 
         bar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -83,14 +80,13 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-
         bouton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 debut = bar1.getProgress();
                 limite = bar2.getProgress();
                 Log.i("    Debut la !!!!! :   ", String.valueOf(debut));
-                Log.i("  Limite la !!!!! :   ", String.valueOf(limite));
+                Log.i("   Limite la !!!!! :   ", String.valueOf(limite));
 
                 Intent intent = new Intent();
                 intent.putExtra("Debut", debut);
@@ -99,8 +95,5 @@ public class Settings extends AppCompatActivity {
                 finish();
             }
         });
-
     }
-
-
 }
