@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.cdsm.compteur.MainActivity">
+    tools:context="com.example.cdsm.compteur.MainActivity"
+    android:background="@drawable/blackbackground">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintBottom_toTopOf="@id/button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/button">
-
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <TextView
@@ -21,49 +22,52 @@
             android:layout_width="50sp"
             android:layout_height="wrap_content"
             android:layout_above="@+id/button"
-            android:textSize="40sp"
+            android:layout_margin="8dp"
+            android:background="@drawable/back"
+            android:baselineAligned="false"
             android:gravity="center"
+            android:textSize="40sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/text1"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/back"
-            android:layout_margin="0dp"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text1"
             android:layout_width="50sp"
             android:layout_height="wrap_content"
             android:layout_above="@+id/button"
-            android:textSize="40sp"
+            android:layout_margin="8dp"
+            android:background="@drawable/back"
             android:gravity="center"
+            android:textSize="40sp"
             app:layout_constraintLeft_toRightOf="@id/text0"
             app:layout_constraintRight_toLeftOf="@id/text2"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/back"
-            android:layout_margin="0dp"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/text2"
             android:layout_width="50sp"
             android:layout_height="wrap_content"
             android:layout_above="@+id/button"
-            android:textSize="40sp"
+            android:layout_margin="8dp"
+            android:background="@drawable/back"
             android:gravity="center"
+            android:textSize="40sp"
             app:layout_constraintLeft_toRightOf="@id/text1"
             app:layout_constraintRight_toLeftOf="@id/text3"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/back"
-            android:layout_margin="0dp"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/text3"
             android:layout_width="50sp"
             android:layout_height="wrap_content"
             android:layout_above="@+id/button"
-            android:textSize="40sp"
-            android:gravity="center"
-            app:layout_constraintLeft_toRightOf="@id/text2"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="8dp"
             android:background="@drawable/back"
-            android:layout_margin="0dp"/>
+            android:gravity="center"
+            android:textSize="40sp"
+            app:layout_constraintLeft_toRightOf="@id/text2"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </LinearLayout>
 
@@ -83,9 +87,10 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="wrap_content"
+        android:foregroundGravity="center"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginBottom="8dp"
         android:src="@drawable/eteinte"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -96,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="30dp"
         android:text="Settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -106,7 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="30dp"
         android:text="RAZ"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"

@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                int test = 0;
+
                  timer = new CountDownTimer(Long.MAX_VALUE, 10) {
                         public void onTick(long millisUntilFinished) {
 
@@ -136,6 +138,11 @@ public class MainActivity extends AppCompatActivity {
         button.setVisibility(View.INVISIBLE);
         boutonSet.setVisibility(View.VISIBLE);
         boutonRAZ.setVisibility(View.INVISIBLE);
-        timer.cancel();
+        try{
+            timer.cancel();
+        }
+        catch (Exception e){
+        }
+
     }
 }
