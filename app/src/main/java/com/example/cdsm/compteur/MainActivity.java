@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Button button, boutonSet, boutonRAZ;
     CompteurADAL UnCpt;
     Digit[] Compteur;
+    Boolean TestCompteurActif;
 
     TextView[] textTab;
     TextView text0;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         textTab[2] = text2;
         textTab[3] = text3;
 
+        TestCompteurActif = false;
 
         UnCpt = new CompteurADAL(4, debut, limite);
         CompteurRAZ();
@@ -73,12 +75,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
                 int test = 0;
 
-                 timer = new CountDownTimer(Long.MAX_VALUE, 10) {
+
+                if (TestCompteurActif == false)
+                {
+                    TestCompteurActif = true;
+                    timer = new CountDownTimer(Long.MAX_VALUE, 10) {
                         public void onTick(long millisUntilFinished) {
 
 
@@ -91,15 +98,20 @@ public class MainActivity extends AppCompatActivity {
                             if(UnCpt.GetLampe()){
 
                                 timer.cancel();
+                                TestCompteurActif = false;
                                 image.setImageResource(R.drawable.allumee);
                             }
                         }
                         public void onFinish(){
-
+                            TestCompteurActif = false;
                         }
 
                     }.start();
                 }
+
+                }
+
+
 
         });
 
@@ -134,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
     public void buttonRAZ_Clicked(View view)
     {
         CompteurRAZ();
+        TestCompteurActif = false;
         image.setImageResource(R.drawable.eteinte);
         button.setVisibility(View.INVISIBLE);
         boutonSet.setVisibility(View.VISIBLE);
