@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Settings.class);
-
                 startActivityForResult(intent, 1);
             }
         });
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                                 textTab[i].setText(String.valueOf(Compteur[i].getValeur()));
                             }
 
-                            if(UnCpt.GetLampe()){
+                             if(UnCpt.GetLampe()){
 
                                 timer.cancel();
                                 TestCompteurActif = false;
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                     }.start();
                 }
 
-                }
+            }
 
 
 
@@ -136,6 +135,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
     public void CompteurRAZ()
     {
         for (int i = 0; i < 4; i++) {
@@ -157,5 +161,30 @@ public class MainActivity extends AppCompatActivity {
         catch (Exception e){
         }
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (limite != 0 && TestCompteurActif)
+        {
+            String saveCompteur = "";
+
+            for (int i = 0; i < 4; i++) {
+                saveCompteur = saveCompteur + textTab[i];
+            }
+
+            outState.putInt("saveLimite",limite);
+            outState.putInt("saveDebut",Integer.parseInt(saveCompteur));
+        }
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        debut = savedInstanceState.getInt("saveDebut");
+        limite = savedInstanceState.getInt("saveLimite");
+        //button.performClick();
     }
 }
