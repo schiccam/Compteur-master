@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
     int limite = 0;
     int debut = 0;
+    Boolean testRotation = false;
+
 
     CountDownTimer timer;
 
@@ -58,8 +61,31 @@ public class MainActivity extends AppCompatActivity {
 
         TestCompteurActif = false;
 
+        if(savedInstanceState != null)
+        {
+            limite = savedInstanceState.getInt("saveL");
+            debut = savedInstanceState.getInt("saveD");
+            testRotation = savedInstanceState.getBoolean("saveR");
+            int temp = debut;
+            for(int i = 3;i > -1;i--)
+            {
+                textTab[i].setText(String.valueOf(temp%10));
+                temp = temp/10;
+            }
+
+
+
+            Log.i("Limite =========",String.valueOf(limite));
+            Log.i("Debut =========",String.valueOf(debut));
+        }
+
+
+
         UnCpt = new CompteurADAL(4, debut, limite);
-        CompteurRAZ();
+        if(!testRotation)
+            CompteurRAZ();
+
+
 
 
         boutonSet.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +139,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+        if(testRotation)
+        {
+            button.setVisibility(View.VISIBLE);
+            boutonSet.setVisibility(View.INVISIBLE);
+            boutonRAZ.setVisibility(View.VISIBLE);
+            button.performClick();
+        }
 
     }
 
@@ -120,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, intent);
 
         if(resultCode == Activity.RESULT_OK){
-            debut = intent.getIntExtra("Debut", 0);
+            debut = intent.getIntExtra("Debut", debut);
             limite = intent.getIntExtra("Limite",limite);
             UnCpt = new CompteurADAL(4, debut, limite);
             Compteur = UnCpt.getCompteur();
@@ -161,30 +194,28 @@ public class MainActivity extends AppCompatActivity {
         catch (Exception e){
         }
 
+
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+
         if (limite != 0 && TestCompteurActif)
         {
             String saveCompteur = "";
 
             for (int i = 0; i < 4; i++) {
-                saveCompteur = saveCompteur + textTab[i];
+                saveCompteur = saveCompteur + textTab[i].getText();
             }
 
-            outState.putInt("saveLimite",limite);
-            outState.putInt("saveDebut",Integer.parseInt(saveCompteur));
+            int Conversion = Integer.parseInt(saveCompteur);
+
+            outState.putInt("saveL",limite);
+            outState.putInt("saveD",Conversion);
+            outState.putBoolean("saveR",true);
+
         }
 
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        debut = savedInstanceState.getInt("saveDebut");
-        limite = savedInstanceState.getInt("saveLimite");
-        //button.performClick();
     }
 }
