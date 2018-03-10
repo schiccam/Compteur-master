@@ -39,6 +39,7 @@ public class Settings extends AppCompatActivity {
 
         bar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
+            // Contrôle de la valeur pour début
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (bar1.getProgress()>=bar2.getProgress())
@@ -50,23 +51,18 @@ public class Settings extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
             }
 
+            //Affichage de la valeur dans un TextView
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
-                // TODO Auto-generated method stub
-
                 ValDeb.setText(String.valueOf(bar1.getProgress()));
-
-
-
-
             }
         });
 
         bar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
+            // Contrôle de la valeur pour limite
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (bar2.getProgress()<=bar1.getProgress())
@@ -78,19 +74,16 @@ public class Settings extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
             }
 
+            //Affichage de la valeur dans un TextView
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
-                // TODO Auto-generated method stub
-
                 ValLim.setText(String.valueOf(bar2.getProgress()));
-
-
             }
         });
 
+        // Retour à l'activité principale
         bouton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

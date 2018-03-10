@@ -61,11 +61,14 @@ public class MainActivity extends AppCompatActivity {
 
         TestCompteurActif = false;
 
+
+        // Récupération des données après rotation
         if(savedInstanceState != null)
         {
             limite = savedInstanceState.getInt("saveL");
             debut = savedInstanceState.getInt("saveD");
             testRotation = savedInstanceState.getBoolean("saveR");
+            // Affichage de la valeur après la rotation
             int temp = debut;
             for(int i = 3;i > -1;i--)
             {
@@ -73,21 +76,21 @@ public class MainActivity extends AppCompatActivity {
                 temp = temp/10;
             }
 
-
-
-            Log.i("Limite =========",String.valueOf(limite));
-            Log.i("Debut =========",String.valueOf(debut));
+            /*Log.i("Limite =========",String.valueOf(limite));
+            Log.i("Debut =========",String.valueOf(debut));*/
         }
 
 
-
+        // Initialisation du compteur
         UnCpt = new CompteurADAL(4, debut, limite);
+
+        // Affichage du compteur au 1er démarage de l'application
         if(!testRotation)
             CompteurRAZ();
 
 
 
-
+        // Bouton vers l'activité Settings
         boutonSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,15 +101,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+        // Bouton Start
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-
-                int test = 0;
-
-
+                // if pour empêcher le click multiple
                 if (TestCompteurActif == false)
                 {
                     TestCompteurActif = true;
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < 4; i++) {
                                 textTab[i].setText(String.valueOf(Compteur[i].getValeur()));
                             }
-
+                             // Arrêt du compteur quand la limite est atteinte
                              if(UnCpt.GetLampe()){
 
                                 timer.cancel();
@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+        // Affichage des boutons après la rotation
         if(testRotation)
         {
             button.setVisibility(View.VISIBLE);
@@ -148,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
+    // Récupération des données depuis l'activité Settings
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
 
@@ -167,12 +168,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
+   // Initialisation des 4 TextView à 0
     public void CompteurRAZ()
     {
         for (int i = 0; i < 4; i++) {
@@ -201,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        if (limite != 0 && TestCompteurActif)
+        if (limite != 0 && debut != 0 && TestCompteurActif)
         {
             String saveCompteur = "";
 
